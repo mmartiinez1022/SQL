@@ -1,0 +1,45 @@
+Created my Own Store, 
+where I sold items, like clothing or bikes, whatever I wanted my store to specialize in. I had a table for all the items in my store, 
+and at least 5 columns for the kind of data I thought my store needed.  
+
+I sold at least 15 items, and used select statements to order my items by price and showed at least one statistic about the items.
+
+CREATE TABLE store (id INTEGER PRIMARY KEY, item TEXT, section TEXT, price INTEGER, popularity INTEGER);
+
+INSERT INTO store VALUES (1, "shirt", "clothes", 20, 50);
+INSERT INTO store VALUES (2, "banana", "produce", 0.99, 95);
+INSERT INTO store VALUES (3, "bread", "produce", 2.99, 55);
+INSERT INTO store VALUES (4, "beans", "bulk", 0.99, 50);
+INSERT INTO store VALUES (5, "turkey", "meat", 4.99, 65);
+INSERT INTO store VALUES (6, "salsa", "fresh", 3.25, 43);
+INSERT INTO store VALUES (7, "shirt", "clothes", 2.99, 35);
+INSERT INTO store VALUES (8, "brocoli", "bulk", 2.99, 50);
+INSERT INTO store VALUES (9, "chick'n nuggs", "meat", 4.99, 75);
+INSERT INTO store VALUES (10, "peas", "frozen", 0.99, 25);
+INSERT INTO store VALUES (11, "smoothie berries", "frozen", 2.99, 33);
+INSERT INTO store VALUES (12, "granola", "bulk", 1.99, 80);
+INSERT INTO store VALUES (13, "vitamin D", "health", 8.99,29);
+INSERT INTO store VALUES (14, "nutritional yeast", "health", 2.99, 26);
+INSERT INTO store VALUES (15, "popcorn", "snacks", 1.99, 47);
+
+
+SELECT * FROM store ORDER BY price; 
+--- selection would print 5 columns of data and ordered by price. 
+
+
+--what is the avg price of items in the bread section? 
+
+SELECT AVG(price) "avg bread item price"
+FROM store
+where section='bread'; 
+---- NULL value at this time. 
+
+--what are the most 10 popular items? 
+SELECT item, price, popularity
+FROM store
+order by popularity desc
+limit 10;
+
+The selection would then print the 10 rows of data 
+
+
