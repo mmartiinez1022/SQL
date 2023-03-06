@@ -1,0 +1,119 @@
+Created my own Data set with the below: 
+
+
+What are average, max, and min values in the data?
+What about those numbers per category in the data (using HAVING)?
+What ways are there to group the data values that don’t exist yet (using CASE)?
+What interesting ways are there to filter the data (using AND/OR)?
+
+
+/* Put your data in here and query it! */
+
+CREATE TABLE cars (ID INTEGER PRIMARY KEY, name TEXT, popularity INTEGER, alignment TEXT, town_name TEXT, speed INTEGER, durability INTEGER);
+
+INSERT INTO cars VALUES(1, "Van", 1, "yes", "Spencer", 50, 10); 
+INSERT INTO cars VALUES(2, "Truck", 2, "yes", "Marlborough", 20, 10); 
+INSERT INTO cars VALUES(3, "Coop", 1, "no", "Marlborough", 80, 2); 
+INSERT INTO cars VALUES(4, "Van", 3, "no", "Ashland", 40, 2);
+INSERT INTO cars VALUES(5, "CrossTrack", 5, "Yes", "Spencer", 50, 10);
+INSERT INTO cars VALUES(6, "Van", 1, "yes", "Spencer", 50, 9);
+INSERT INTO cars VALUES(7, "SUV", 7, "yes", "Hopedale", 10, 10);
+INSERT INTO cars VALUES(8, "RangeRover", 7, "no", "Holland", 50, 5);
+INSERT INTO cars VALUES(9, "Wagon", 7, "yes", "Sturbridge", 5, 8);
+INSERT INTO cars VALUES(10, "Kia", 8, "no", "Northbridge", 70, 9);
+INSERT INTO cars VALUES(11, "Van", 1, "yes", "Spencer", 50, 10); 
+INSERT INTO cars VALUES(12, "Truck", 2, "yes", "Marlborough", 20, 10); 
+INSERT INTO cars VALUES(13, "Coop", 1, "no", "Marlborough", 80, 2); 
+INSERT INTO cars VALUES(14, "Van", 3, "no", "Ashland", 40, 2);
+INSERT INTO cars VALUES(15, "CrossTrack", 5, "Yes", "Spencer", 50, 10);
+INSERT INTO cars VALUES(16, "Van", 1, "yes", "Spencer", 50, 9);
+INSERT INTO cars VALUES(17, "SUV", 7, "yes", "Hopedale", 10, 10);
+INSERT INTO cars VALUES(18, "RangeRover", 7, "no", "Holland", 50, 5);
+INSERT INTO cars VALUES(19, "Wagon", 7, "yes", "Sturbridge", 5, 8);
+INSERT INTO cars VALUES(20, "Kia", 8, "no", "Northbridge", 70, 9);
+
+--- print table 
+SELECT * FROM cars;
+
+Shows all the database schema.
+
+DATABASE SCHEMA
+cars20 rows
+ID (PK)INTEGER
+nameTEXT
+popularityINTEGER
+alignmentTEXT
+town_nameTEXT
+speedINTEGER
+durabilityINTEGER
+
+
+--- what is the average popularity rate and Max and Min speeds of the data? 
+SELECT AVG(popularity) FROM cars; SELECT MAX(speed)FROM cars; SELECT MIN(speed) FROM cars;
+
+AVG(popularity)
+4.2
+
+MAX(speed)
+80
+
+MIN(speed)
+5
+
+--- USE HAVING to aggregate 
+SELECT COUNT(popularity), town_name FROM cars GROUP BY town_name HAVING COUNT(popularity) >= 3;
+
+
+COUNT(popularity),	town_name
+4,	Marlborough
+6,	Spencer
+
+
+--- CASE example 
+SELECT speed, 
+CASE
+WHEN speed < 30 THEN "Slow"
+WHEN speed > 30 THEN "Fast" 
+ELSE "Quality Low"
+End AS Speed_Description
+FROM cars;
+
+Table pulled shows below: 
+
+peed	Speed_Description
+50	Fast
+20	Slow
+80	Fast
+40	Fast
+50	Fast
+50	Fast
+10	Slow
+50	Fast
+5	Slow
+70	Fast
+50	Fast
+20	Slow
+80	Fast
+40	Fast
+50	Fast
+50	Fast
+10	Slow
+50	Fast
+5	Slow
+70	Fast
+
+
+--- Using AND function with data table. 
+SELECT name, town_name 
+FROM cars
+WHERE town_name ="Spencer" AND name = "Van"
+
+name	town_name
+Van	Spencer
+Van	Spencer
+Van	Spencer
+Van	Spencer
+
+
+
+
